@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "MainViewController.h"
+#import "SBSound.h"
 
 @implementation AppDelegate
 
@@ -18,12 +19,58 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [self loadSounds];
+    
     MainViewController *controller = (MainViewController *)self.window.rootViewController;
     controller.managedObjectContext = self.managedObjectContext;
     return YES;
 }
-							
+
+- (void)loadSounds
+{
+    NSError *error = nil;
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *soundBoardEndpoint = [defaults objectForKey:@"SoundBoardEndpoint"];
+    if (soundBoardEndpoint != nil) {
+        NSData *soundBoardData = [NSData dataWithContentsOfURL:[NSURL URLWithString:soundBoardEndpoint]];
+
+        NSDictionary *json = nil;
+        if (soundBoardData) {
+            json = [NSJSONSerialization JSONObjectWithData:soundBoardData options:kNilOptions error:nil];
+            
+            // delete any existing sounds
+            NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"SBSound" inManagedObjectContext:self.managedObjectContext];
+            NSFetchRequest *request = [[NSFetchRequest alloc] init];
+            
+            [request setEntity:entityDescription];
+            
+            NSArray *sounds = [_managedObjectContext executeFetchRequest:request error:&error];
+            
+            //error handling goes here
+            for (NSManagedObject *sound in sounds) {
+                [self.managedObjectContext deleteObject:sound];
+            }
+
+            if (![self.managedObjectContext save:&error]) {
+                NSLog(@"Error saving: %@", [error localizedDescription]);
+            }
+            
+            for (NSDictionary *soundData in [json objectForKey:@"commands"]) {
+                // create sounds
+                SBSound *sound = [NSEntityDescription insertNewObjectForEntityForName:@"SBSound" inManagedObjectContext:self.managedObjectContext];
+
+                [sound setTitle:[soundData objectForKey:@"title"]];
+                [sound setCommand:[soundData objectForKey:@"command"]];
+                
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Error saving: %@", [error localizedDescription]);
+                }
+            }
+        }
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -109,29 +156,6 @@
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    

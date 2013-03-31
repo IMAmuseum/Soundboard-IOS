@@ -10,8 +10,6 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
-
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
+@interface MainViewController : UIViewController <FlipsideViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @end

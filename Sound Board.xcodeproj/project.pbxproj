@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		651B42091707D6EB00A2051D /* SBSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 651B42081707D6EB00A2051D /* SBSound.m */; };
 		65FEEC131707C84C00ADF0C4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FEEC121707C84C00ADF0C4 /* UIKit.framework */; };
 		65FEEC151707C84C00ADF0C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FEEC141707C84C00ADF0C4 /* Foundation.framework */; };
 		65FEEC171707C84C00ADF0C4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FEEC161707C84C00ADF0C4 /* CoreGraphics.framework */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		651B42071707D6EB00A2051D /* SBSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSound.h; sourceTree = "<group>"; };
+		651B42081707D6EB00A2051D /* SBSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSound.m; sourceTree = "<group>"; };
 		65FEEC0F1707C84C00ADF0C4 /* Sound Board.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sound Board.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65FEEC121707C84C00ADF0C4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		65FEEC141707C84C00ADF0C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,6 +64,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		651B420A1707D6F700A2051D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				65FEEC321707C84C00ADF0C4 /* MainViewController.h */,
+				65FEEC331707C84C00ADF0C4 /* MainViewController.m */,
+				65FEEC351707C84C00ADF0C4 /* FlipsideViewController.h */,
+				65FEEC361707C84C00ADF0C4 /* FlipsideViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		651B420B1707D6FE00A2051D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65FEEC2F1707C84C00ADF0C4 /* Sound_Board.xcdatamodeld */,
+				651B42071707D6EB00A2051D /* SBSound.h */,
+				651B42081707D6EB00A2051D /* SBSound.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		651B420C1707D70300A2051D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				65FEEC2C1707C84C00ADF0C4 /* MainStoryboard.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		65FEEC061707C84C00ADF0C4 = {
 			isa = PBXGroup;
 			children = (
@@ -94,13 +126,10 @@
 			children = (
 				65FEEC231707C84C00ADF0C4 /* AppDelegate.h */,
 				65FEEC241707C84C00ADF0C4 /* AppDelegate.m */,
-				65FEEC2C1707C84C00ADF0C4 /* MainStoryboard.storyboard */,
-				65FEEC321707C84C00ADF0C4 /* MainViewController.h */,
-				65FEEC331707C84C00ADF0C4 /* MainViewController.m */,
-				65FEEC351707C84C00ADF0C4 /* FlipsideViewController.h */,
-				65FEEC361707C84C00ADF0C4 /* FlipsideViewController.m */,
-				65FEEC2F1707C84C00ADF0C4 /* Sound_Board.xcdatamodeld */,
+				651B420A1707D6F700A2051D /* Controllers */,
+				651B420B1707D6FE00A2051D /* Models */,
 				65FEEC1B1707C84C00ADF0C4 /* Supporting Files */,
+				651B420C1707D70300A2051D /* Views */,
 			);
 			path = "Sound Board";
 			sourceTree = "<group>";
@@ -190,6 +219,7 @@
 				65FEEC311707C84C00ADF0C4 /* Sound_Board.xcdatamodeld in Sources */,
 				65FEEC341707C84C00ADF0C4 /* MainViewController.m in Sources */,
 				65FEEC371707C84C00ADF0C4 /* FlipsideViewController.m in Sources */,
+				651B42091707D6EB00A2051D /* SBSound.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +342,7 @@
 				65FEEC3C1707C84C00ADF0C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

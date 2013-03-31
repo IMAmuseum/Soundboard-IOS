@@ -1,56 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2546" systemVersion="12A248" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12D78" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1876"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
-        <!--class Prefix:identifier Main View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="5">
             <objects>
                 <viewController id="2" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" hasAttributedTitle="NO" lineBreakMode="middleTruncation" id="10">
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843137254902" green="0.30980392156862746" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
+                            <searchBar contentMode="redraw" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="bCT-6Y-PEs">
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <segue destination="6" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="11"/>
+                                    <outlet property="delegate" destination="2" id="6Vr-pc-yIc"/>
                                 </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="10" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="apl-1S-UOC"/>
-                            <constraint firstAttribute="bottom" secondItem="10" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="bcr-if-aDO"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-51" y="182"/>
-        </scene>
-        <!--class Prefix:identifier Flipside View Controller-->
-        <scene sceneID="9">
-            <objects>
-                <viewController id="6" customClass="FlipsideViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="7">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <navigationBar translatesAutoresizingMaskIntoConstraints="NO" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="12">
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yTR-j8-6zq">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="328" id="TTQ-r9-mjv"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="2" id="Hhf-Rw-ZIN"/>
+                                    <outlet property="delegate" destination="2" id="lUS-6f-prt"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="mpd-fn-Wg3">
                                 <items>
-                                    <navigationItem title="Title" id="13">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="14">
+                                    <navigationItem title="Sound Board" id="OVU-px-5hw">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="seX-v0-N4q">
                                             <connections>
-                                                <action selector="done:" destination="6" id="16"/>
+                                                <action selector="reloadData:" destination="2" id="6Rq-if-ZET"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Options" id="oaf-Sh-pBD">
+                                            <connections>
+                                                <segue destination="6" kind="modal" identifier="showAlternate" modalTransitionStyle="flipHorizontal" id="gaA-r1-MXn"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -59,11 +47,79 @@
                         </subviews>
                         <color key="backgroundColor" white="0.25" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mpd-fn-Wg3" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="ApU-eN-WeS"/>
+                            <constraint firstItem="mpd-fn-Wg3" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="F8r-RN-sF3"/>
+                            <constraint firstItem="mpd-fn-Wg3" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="GSg-R4-Iqb"/>
+                            <constraint firstItem="yTR-j8-6zq" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="Ko1-Y9-YAx"/>
+                            <constraint firstItem="yTR-j8-6zq" firstAttribute="top" secondItem="bCT-6Y-PEs" secondAttribute="bottom" type="default" id="Z7R-6a-i4h"/>
+                            <constraint firstItem="bCT-6Y-PEs" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="Zay-rP-Lza"/>
+                            <constraint firstItem="yTR-j8-6zq" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="lM9-wM-26G"/>
+                            <constraint firstItem="bCT-6Y-PEs" firstAttribute="centerX" secondItem="mpd-fn-Wg3" secondAttribute="centerX" type="default" id="s4g-lc-g4N"/>
+                            <constraint firstItem="bCT-6Y-PEs" firstAttribute="top" secondItem="mpd-fn-Wg3" secondAttribute="bottom" type="default" id="u6F-zi-OJY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="questionListTable" destination="yTR-j8-6zq" id="hYf-YX-00n"/>
+                        <outlet property="searchDisplayController" destination="F9O-rh-K0v" id="Oky-0p-kdB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="F9O-rh-K0v">
+                    <connections>
+                        <outlet property="delegate" destination="2" id="GfV-IU-Hte"/>
+                        <outlet property="searchBar" destination="bCT-6Y-PEs" id="fCU-xO-RCw"/>
+                        <outlet property="searchContentsController" destination="2" id="OCa-r4-GYY"/>
+                        <outlet property="searchResultsDataSource" destination="2" id="6sz-k6-5RT"/>
+                        <outlet property="searchResultsDelegate" destination="2" id="Yaq-r8-hgN"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-51" y="182"/>
+        </scene>
+        <!--Flipside View Controller-->
+        <scene sceneID="9">
+            <objects>
+                <viewController id="6" customClass="FlipsideViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                                <items>
+                                    <navigationItem title="Options" id="13">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="14">
+                                            <connections>
+                                                <action selector="done:" destination="6" id="16"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Endpoint" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahq-LH-Ta9">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y4o-MM-erO">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ahq-LH-Ta9" firstAttribute="top" secondItem="7" secondAttribute="top" constant="65" id="45I-nU-Qae"/>
+                            <constraint firstItem="ahq-LH-Ta9" firstAttribute="leading" secondItem="7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="ATi-vp-n1l"/>
+                            <constraint firstItem="Y4o-MM-erO" firstAttribute="leading" secondItem="7" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="BfD-XI-i3O"/>
+                            <constraint firstAttribute="trailing" secondItem="Y4o-MM-erO" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="YGX-G5-ST0"/>
                             <constraint firstItem="12" firstAttribute="leading" secondItem="7" secondAttribute="leading" type="default" id="kyL-VC-rMY"/>
                             <constraint firstItem="12" firstAttribute="top" secondItem="7" secondAttribute="top" type="default" id="oQ7-QK-1Ab"/>
+                            <constraint firstItem="Y4o-MM-erO" firstAttribute="top" secondItem="ahq-LH-Ta9" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="yKq-X4-psG"/>
                             <constraint firstItem="12" firstAttribute="trailing" secondItem="7" secondAttribute="trailing" type="default" id="yf5-Bx-wHg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="endpoint" destination="Y4o-MM-erO" id="kSp-LW-5w0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,8 +127,22 @@
         </scene>
     </scenes>
     <classes>
-        <class className="IBUISceneExitPlaceholder" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IBUISceneExitPlaceholder.h"/>
+        <class className="FlipsideViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlipsideViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+                <relationship kind="outlet" name="endpoint" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="reloadData:"/>
+                <relationship kind="outlet" name="questionListTable" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
