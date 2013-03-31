@@ -82,7 +82,10 @@
     NSHTTPURLResponse *response;
     NSError  *error;
     
-    NSString *commandEndpoint = [NSString stringWithFormat:@"http://stanley.imalab.us/soundboard/soundoff/commands/%@", sound.command];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *soundBoardEndpoint = [defaults objectForKey:@"SoundBoardEndpoint"];
+    
+    NSString *commandEndpoint = [NSString stringWithFormat:@"%@/%@", soundBoardEndpoint, sound.command];
     NSURL *url = [NSURL URLWithString:commandEndpoint];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"POST"];
